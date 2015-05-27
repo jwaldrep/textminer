@@ -64,7 +64,6 @@ def test_words():
     assert not v.words("18-wheeler tarbox", count=3)
 
 
-@xfail
 def test_phone_numbers():
     """US phone numbers only."""
 
@@ -79,7 +78,6 @@ def test_phone_numbers():
     assert not v.phone_number("mobile")
 
 
-@xfail
 def test_money():
     """We are just concerned with dollars here."""
 

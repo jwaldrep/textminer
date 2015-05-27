@@ -22,3 +22,9 @@ def words(text, count=0):
         if not word(a_word):
             return False
     return True
+
+def phone_number(text):
+    return re.match(r'\(?\d{3}\)?[ \-\.]?\d{3}[ \-\.]?\d{4}', text)
+
+def money(text):
+    return re.match(r'^\$(\d{1,3})+', text)
