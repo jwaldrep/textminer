@@ -34,3 +34,20 @@ def money(text):
                            (\.\d{2})?$  # dec require 2 trailing digits (opt)
                            """, text, re.VERBOSE)
     # return re.match(r'^\$(((\d{1,3})(,\d{3})+)|(\d+))(\.\d{2})?$', text)
+
+def zipcode(text):
+    return re.match(r'^\d{5}(-\d{4})?$', text)
+
+def date(text):
+    """
+        assert v.date("9/4/1976")
+        assert v.date("1976-09-04")
+        assert v.date("2015-01-01")
+        assert v.date("02/15/2004")
+        assert not v.date("9/4")
+        assert not v.date("2015")
+    """
+    return re.match(r"""
+                        [01]?[0-9][/-][0-2]?[0-9][/-]\d{4} |  # MM/DD/YYYY
+                        \d{4}[/-][0-2]?[0-9][/-][01]?[0-9]    # YY/MM/DDDD
+                     """, text, re.VERBOSE)
