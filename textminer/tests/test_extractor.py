@@ -4,7 +4,6 @@ params = pytest.mark.parametrize
 
 import textminer.extractor as x
 
-@xfail
 def test_phone_numbers():
     text = """Dear Mr. Davis,
 

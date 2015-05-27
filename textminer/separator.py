@@ -13,7 +13,7 @@ def words(text):
     if match:
         return re.findall(r'(\b(?:\w*\-)?[A-Za-z]+\b)', text)
 
-def phone_number(text):
+def phone_number(text, return_match=False):
     match = re.search(r"""
                      \(?(?P<area_code>\d{3})\)?
                      [ \-\.]?
@@ -28,6 +28,8 @@ def phone_number(text):
             gd['number'] = digits[:3] + '-' + digits[3:]
         elif len(digits) == 8:
             gd['number'] = digits[:3] + '-' + digits[4:]
+        if return_match:
+            return gd, match
         return gd
         # TODO: Find a cleaner way to clean up the phone numbers
 
