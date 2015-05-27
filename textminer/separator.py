@@ -53,3 +53,35 @@ def zipcode(text):
                     """, text, re.VERBOSE)
     if match:
         return match.groupdict()
+
+def date(text):
+        # ("9/4/1976", {"month": 9, "day": 4, "year": 1976}),
+        # ("1976-09-04", {"month": 9, "day": 4, "year": 1976}),
+        # ("2015-01-01", {"month": 1, "day": 1, "year": 2015}),
+        # ("02/15/2004", {"month": 2, "day": 15, "year": 2004}),
+        # ("9/4", None),
+        # ("2015", None),
+
+    match = re.match(r"""
+                        (?P<month>[01]?[0-9])[/-]             # MM/DD/YYYY
+                        (?P<day>[0-2]?[0-9])[/-]
+                        (?P<year>\d{4})
+                        |
+                        (?P<year2>\d{4})[/-]                   # YYYY/MM/DD
+                        (?P<month2>[0-2]?[0-9])[/-]
+                        (?P<day2>[01]?[0-9])
+                      """, text, re.VERBOSE)
+    if match:
+        gd = match.groupdict()
+        if gd.get('year2',False):
+            gd['day'] = gd['day2']
+            gd['month'] = gd['month2']
+            gd['year'] = gd['year2']
+        del(gd['day2'])
+        del(gd['month2'])
+        del(gd['year2'])
+
+        gd['day'] = int(gd['day'])
+        gd['month'] = int(gd['month'])
+        gd['year'] = int(gd['year'])
+        return gd

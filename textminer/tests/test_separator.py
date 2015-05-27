@@ -70,7 +70,6 @@ def test_zip(input, expected):
     assert s.zipcode(input) == expected
 
 
-@xfail
 @params("input,expected", [
     ("9/4/1976", {"month": 9, "day": 4, "year": 1976}),
     ("1976-09-04", {"month": 9, "day": 4, "year": 1976}),
@@ -94,7 +93,7 @@ def test_date(input, expected):
     ("9/4", None),
     ("2015", None),
 ])
-def test_date(input, expected):
+def test_hard_date(input, expected):
     assert s.date(input) == expected
 
 
@@ -106,7 +105,7 @@ def test_date(input, expected):
     ("07/40/2015", None),
     ("02/30/2015", None),
 ])
-def test_hard_date(input, expected):
+def test_hard_date2(input, expected):
     assert s.date(input) == expected
 
 
