@@ -30,3 +30,18 @@ def phone_number(text):
             gd['number'] = digits[:3] + '-' + digits[4:]
         return gd
         # TODO: Find a cleaner way to clean up the phone numbers
+
+
+def money(text):
+    match = re.match(r"""^(?P<currency>\$)   # currency group
+                          (?P<amount>
+                           ((\d{1,3}  # $ and at least 1 digit, 3 max
+                           (,\d{3})+)   # commas require 3 trailing digits (opt)
+                           |            # unless there are no commas, in
+                           (\d+))       # which case we just want 1+ digits
+                           (\.\d{2})?)$  # dec require 2 trailing digits (opt)
+                           """, text, re.VERBOSE)
+    if match:
+        gd = match.groupdict()
+        gd['amount'] = float(gd['amount'].replace(',',''))
+        return gd

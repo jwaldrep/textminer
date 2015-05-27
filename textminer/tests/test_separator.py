@@ -27,7 +27,6 @@ def test_phone_numbers(input, expected):
     assert s.phone_number(input) == expected
 
 
-@xfail
 @params("input,expected", [
     ("$4", {"currency": "$", "amount": 4.0}),
     ("$19", {"currency": "$", "amount": 19.0}),
