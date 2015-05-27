@@ -45,3 +45,11 @@ def money(text):
         gd = match.groupdict()
         gd['amount'] = float(gd['amount'].replace(',',''))
         return gd
+
+def zipcode(text):
+    match = re.match(r"""
+                        ^(?P<zip>\d{5})
+                        (-(?P<plus4>\d{4}))?$
+                    """, text, re.VERBOSE)
+    if match:
+        return match.groupdict()

@@ -54,7 +54,7 @@ def test_money(input, expected):
     assert s.money(input) == expected
 
 
-@xfail
+
 @params("input,expected", [
     ("63936", {"zip": "63936", "plus4": None}),
     ("50583", {"zip": "50583", "plus4": None}),
