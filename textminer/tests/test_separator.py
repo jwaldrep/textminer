@@ -4,7 +4,6 @@ params = pytest.mark.parametrize
 
 import textminer.separator as s
 
-@xfail
 @params("input,expected", [
     ("hello", ['hello']),
     ("hello world", ['hello', 'world']),
@@ -16,7 +15,6 @@ def test_words(input, expected):
     assert s.words(input) == expected
 
 
-@xfail
 @params("input,expected", [
     ("919-555-1212", {"area_code": "919", "number": "555-1212"}),
     ("(919) 555-1212", {"area_code": "919", "number": "555-1212"}),
