@@ -132,3 +132,13 @@ def month_to_int(text):
         return months[text]
     elif text in month_abbrs:
         return month_abbrs[text]
+
+def email(text):
+    match = re.match(r"""
+                        (?P<local>[\d\w\.]+)@
+                        (?P<domain>\w+\.(com|org|net|us))
+                      """,
+                      text, re.VERBOSE)
+    if match:
+        gd = match.groupdict()
+        return gd

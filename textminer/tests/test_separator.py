@@ -107,7 +107,6 @@ def test_hard_date2(input, expected):
     assert s.date(input) == expected
 
 
-@xfail
 @params("input,expected", [
     ("stroman.azariah@yahoo.com",
      {"local": "stroman.azariah",
