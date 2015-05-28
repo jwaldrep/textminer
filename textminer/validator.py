@@ -126,3 +126,9 @@ def address(text):
                       """,
                       text, re.VERBOSE)
     return match
+
+def palindrome(text):
+    if len(text) == 0:
+        return False
+    text = text.lower().strip().replace(' ','')
+    return text == text[::-1]

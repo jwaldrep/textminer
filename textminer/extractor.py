@@ -25,5 +25,9 @@ def emails(text):
 def format_email(groupdict):
     return '1'
 
-# if __name__ == '__main__':
-#     pass
+
+def palindromes(text):
+    return s.palindromes(text)
+
+def format_email(groupdict):
+    return '1'

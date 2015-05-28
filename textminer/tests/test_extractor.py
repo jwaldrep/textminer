@@ -22,7 +22,7 @@ You can contact me at (919) 123-4569 at your convenience."""
     assert x.phone_numbers(text) == ["(454) 999-1212", "(919) 123-4569"]
 
 ## HARD MODE BEGINS
-
+@xfail
 def test_emails():
     text = """Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi
     welsh onion daikon amaranth@gmail.com tatsoi tomatillo azuki bean garlic.
@@ -34,3 +34,24 @@ def test_emails():
     assert x.emails(text) == ["amaranth@gmail.com",
                               "pea@sprouts.org",
                               "cucumber.earthnut@pea.net"]
+
+
+def test_palindromes():
+    text = """Dear Mr. Davis,
+
+I got to know of your company through our mutual friend Fiona Williams and the
+training you offer to graduate students in Advertising.
+
+I am a graduate student of Mass Communications with specialization in
+Advertising.  I am currently pursuing the last year of my course.
+I would very much like to see firsthand the work environment in an advertising
+agency.
+
+If you would like a reference, my advisor can be reached at (454) 999-1212.
+
+You can contact me at (919) 123-4569 at your convenience.
+
+Regards,
+Tacocat"""
+
+    assert x.palindromes(text) == ['ldl', 'ere', 'tacocat']

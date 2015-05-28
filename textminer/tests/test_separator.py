@@ -135,3 +135,11 @@ def test_email(input, expected):
 ])
 def test_address(input, expected):
     assert s.address(input) == expected
+
+@params("input,expected", [
+    ('Keep a level head, not a racecar!', ['level', 'racecar']),
+    ('A man, a plan, a canal...Panama!', ['amanaplanacanalpanama']),
+    ('not any palindromes in this one', None),
+    ])
+def test_palindromes(input, expected):
+    assert s.palindromes(input) == expected

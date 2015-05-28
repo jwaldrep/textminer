@@ -160,3 +160,23 @@ def address(text):
     if match:
         gd = match.groupdict()
         return gd
+
+def palindromes(text):
+    dromes = []
+    idxs = set()
+    cleaned = re.sub(r'[^A-Za-z]', '', text).lower()
+    regex = re.compile(r'(\w)\w*\1')
+    for idx in range(len(cleaned)):
+        match = re.match(regex, cleaned[idx:])
+        if match:
+            if valid_palindrome(match.group()) and idx not in idxs:
+                dromes.append(match.group())
+                idxs.update(list(range(match.span()[0]+idx, match.span()[1]+idx)))
+    if len(dromes) > 0:
+        return dromes
+
+def valid_palindrome(text):
+    if len(text) == 0:
+        return False
+    text = text.lower().strip().replace(' ','')
+    return text == text[::-1]

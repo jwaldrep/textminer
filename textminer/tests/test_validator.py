@@ -174,3 +174,9 @@ def test_address():
     assert not v.address("99132 Kaylah Union Suite 301")
     assert not v.address("Lake Joellville, NH")
     assert not v.address("35981")
+
+def test_palindrome():
+    assert v.palindrome('racecar')
+    assert v.palindrome('Race car')
+    assert not v.palindrome('')
+    assert not v.palindrome('goose')
