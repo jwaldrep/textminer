@@ -1,4 +1,5 @@
 import re
+import calendar
 
 #     ("hello", ['hello']),
 #     ("hello world", ['hello', 'world']),
@@ -125,4 +126,9 @@ def date(text):
         return gd
 
 def month_to_int(text):
-    return 1
+    months =  {i[1]: i[0] for i in enumerate(calendar.month_name)}
+    month_abbrs = {v: k for k,v in enumerate(calendar.month_abbr)}
+    if text in months:
+        return months[text]
+    elif text in month_abbrs:
+        return month_abbrs[text]
