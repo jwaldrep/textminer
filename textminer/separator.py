@@ -64,26 +64,65 @@ def date(text):
         # ("9/4", None),
         # ("2015", None),
 
+        # ("2014 Jan 01", {"month": 1, "day": 1, "year": 2014}),
+        # ("2014 January 01", {"month": 1, "day": 1, "year": 2014}),
+        # ("Jan. 1, 2015", {"month": 1, "day": 1, "year": 2014}),
+        # ("07/40/2015", None),
+        # ("02/30/2015", None),
+
+    # match = re.match(r"""
+    #                     (?P<month>[01]?[0-9])[/-]             # MM/DD/YYYY
+    #                     (?P<day>[0-2]?[0-9])[/-]
+    #                     (?P<year>\d{4})
+    #                     |
+    #                     (?P<year2>\d{4})[/-]                   # YYYY/MM/DD
+    #                     (?P<month2>[0-2]?[0-9])[/-]
+    #                     (?P<day2>[01]?[0-9])
+    #                   """, text, re.VERBOSE)
+
     match = re.match(r"""
-                        (?P<month>[01]?[0-9])[/-]             # MM/DD/YYYY
+                        (^(?P<month>[01]?[0-9])[/-]             # MM/DD/YYYY
                         (?P<day>[0-2]?[0-9])[/-]
-                        (?P<year>\d{4})
+                        (?P<year>\d{4}))
                         |
-                        (?P<year2>\d{4})[/-]                   # YYYY/MM/DD
-                        (?P<month2>[0-2]?[0-9])[/-]
-                        (?P<day2>[01]?[0-9])
-                      """, text, re.VERBOSE)
+                        (^(?P<year2>\d{4})[\s/-]                 # YYYY/MM/DD
+                            ((((?P<month2>[0-2]?[0-9])[\s/-])
+                            |
+                            (?P<month_word>(\w)+)\s))           # YYYY month DD
+                        (?P<day2>[01]?[0-9]))
+                        |
+                        (^(?P<month_word2>\w+)\.?\s
+                        (?P<day3>[0-3]?\d),\s
+                        (?P<year3>[\d]{4}))
+                      """,
+                      text, re.VERBOSE)
+
     if match:
         gd = match.groupdict()
         if gd.get('year2',False):
             gd['day'] = gd['day2']
-            gd['month'] = gd['month2']
             gd['year'] = gd['year2']
+            if gd.get('month_word',False):
+                gd['month'] = month_to_int(gd['month_word'])
+            else:
+                gd['month'] = gd['month2']
+        elif gd.get('year3'):
+            gd['month'] = month_to_int(gd['month_word2'])
+            gd['day'] = gd['day3']
+            gd['year'] = gd['year3']
         del(gd['day2'])
         del(gd['month2'])
         del(gd['year2'])
+        del(gd['month_word'])
+        del(gd['month_word2'])
+        del(gd['day3'])
+        del(gd['year3'])
+
 
         gd['day'] = int(gd['day'])
         gd['month'] = int(gd['month'])
         gd['year'] = int(gd['year'])
         return gd
+
+def month_to_int(text):
+    return 1

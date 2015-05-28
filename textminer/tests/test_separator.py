@@ -96,11 +96,10 @@ def test_hard_date(input, expected):
     assert s.date(input) == expected
 
 
-@xfail
 @params("input,expected", [
     ("2014 Jan 01", {"month": 1, "day": 1, "year": 2014}),
     ("2014 January 01", {"month": 1, "day": 1, "year": 2014}),
-    ("Jan. 1, 2015", {"month": 1, "day": 1, "year": 2014}),
+    ("Jan. 1, 2015", {"month": 1, "day": 1, "year": 2015}),
     ("07/40/2015", None),
     ("02/30/2015", None),
 ])
