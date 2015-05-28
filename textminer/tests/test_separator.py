@@ -137,7 +137,7 @@ def test_address(input, expected):
     assert s.address(input) == expected
 
 @params("input,expected", [
-    ('Keep a level head, not a racecar!', ['level', 'racecar']),
+    ('Keep a level head, not a racecar!', ['level', 'racecar', ]) #'ee', 'ara']),
     ('A man, a plan, a canal...Panama!', ['amanaplanacanalpanama']),
     ('not any palindromes in this one', None),
     ])

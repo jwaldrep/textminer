@@ -170,8 +170,23 @@ def palindromes(text):
         match = re.match(regex, cleaned[idx:])
         if match:
             if valid_palindrome(match.group()) and idx not in idxs:
-                dromes.append(match.group())
-                idxs.update(list(range(match.span()[0]+idx, match.span()[1]+idx)))
+                start = match.span()[0]+idx
+                end = match.span()[1]+idx
+                if end-start > 3:
+                    dromes.append(match.group())
+                    idxs.update(list(range(start,end)))
+
+    #idxs = set()
+    regex = re.compile(r'(\w)\w*?\1')
+    for idx in range(len(cleaned)):
+        match = re.match(regex, cleaned[idx:])
+        if match:
+            if valid_palindrome(match.group()) and idx not in idxs:
+                start = match.span()[0]+idx
+                end = match.span()[1]+idx
+                if end-start > 3:
+                    dromes.append(match.group())
+                    idxs.update(list(range(start,end)))
     if len(dromes) > 0:
         return dromes
 

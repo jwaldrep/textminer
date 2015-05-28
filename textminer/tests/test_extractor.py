@@ -37,7 +37,7 @@ def test_emails():
 
 
 def test_palindromes():
-    text = """Dear Mr. Davis,
+    text = """Dear Mr. Madam,
 
 I got to know of your company through our mutual friend Fiona Williams and the
 training you offer to graduate students in Advertising.
@@ -52,6 +52,6 @@ If you would like a reference, my advisor can be reached at (454) 999-1212.
 You can contact me at (919) 123-4569 at your convenience.
 
 Regards,
-Tacocat"""
+Ada"""
 
-    assert x.palindromes(text) == ['ldl', 'ere', 'tacocat']
+    assert x.palindromes(text) == ['madam', 'otto', 'illi', 'refer']
