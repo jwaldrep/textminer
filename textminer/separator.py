@@ -142,3 +142,19 @@ def email(text):
     if match:
         gd = match.groupdict()
         return gd
+
+def address(text):
+    match = re.match(r"""
+                        (?P<address>\d+\s           # House # plus space
+                        (\w+\b\s?)+(\.\s)?          # Words plus .
+                        \d*)                        # Apt/etc #
+                        (\n|,)\s*                   # Newline or , +tabs/spaces
+                        (?P<city>(\w+\b\s?)+),\s    # City,
+                        (?P<state>[A-Z]{2})\s       # State
+                        (?P<zip>\d{5})-?            # ZIP
+                        (?P<plus4>\d{4})?
+                      """,
+                      text, re.VERBOSE)
+    if match:
+        gd = match.groupdict()
+        return gd

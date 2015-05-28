@@ -123,7 +123,6 @@ def test_email(input, expected):
     assert s.email(input) == expected
 
 
-@xfail
 @params("input,expected", [
     ("""368 Agness Harbor
      Port Mariah, MS 63293""",
