@@ -133,14 +133,16 @@ def month_to_int(text):
     elif text in month_abbrs:
         return month_abbrs[text]
 
-def email(text):
+def email(text, return_match=False):
     match = re.match(r"""
-                        (?P<local>[\d\w\.]+)@
-                        (?P<domain>\w+\.(com|org|net|us))
+                        \b(?P<local>[\d\w\.]+)@
+                        (?P<domain>\w+\.(com|org|net|us))\b
                       """,
                       text, re.VERBOSE)
     if match:
         gd = match.groupdict()
+        if return_match:
+            return gd, match
         return gd
 
 def address(text):
